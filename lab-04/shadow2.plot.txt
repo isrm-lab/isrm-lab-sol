@@ -1,0 +1,68 @@
+
+set term png
+set xlabel 'Distance[m]'
+set ylabel 'Throughput[Mbps]'  
+set key left 
+set grid 
+set yrange [0:*]
+set xtics 20 
+set xrange [50:250]
+set key top right 
+
+set out 'thr-udp.png'
+plot\
+ './thr' using 1:2 t 'tries=1' w l lw 3, \
+ '' using 1:4 t 'tries=4' w l lw 3, \
+ '' using 1:6 t 'tries=10' w l lw 3
+
+
+set out 'thr-tcp.png'
+plot\
+ './thr' using 1:3 t 'tries=1' w l lw 3, \
+ '' using 1:5 t 'tries=4' w l lw 3, \
+ '' using 1:7  t 'tries=10' w l lw 3
+
+#######################################################
+#probabilitatea de reușită în maximum r încercări
+# unque_recv/unique_sent 
+f(x)=1-(1-x)**r
+
+set ylabel 'PDR(packed delivery ratio)'  
+set out 'mac-pdr.png'
+set key right top # bottom left
+set xrange [*:300]
+plot\
+ './pdr' using 1:($5/$4) t 'simulation tries=1 (PHY)' w l lw 3, \
+ '' using 1:($9/$8) t 'simulation tries=4' w l lw 3, \
+ r=4 '' using 1:(f($5/$4)) t 'analysis tries=4' w p pt 5, \
+ '' using 1:($13/$12)  t 'simulation tries=10' w l lw 3, \
+ r=10 '' using 1:(f($5/$4))  t 'analysis tries=10' w p pt 4
+
+set key left bottom
+set ylabel 'Unique frames sent'
+set out 'unq-sent.png'
+plot\
+ './pdr' using 1:($4) t 'tries=1' w l lw 3, \
+ '' using 1:($8) t 'tries=4' w l lw 3, \
+ '' using 1:($12)  t 'tries=10' w l lw 3
+
+set ylabel 'UDP Throughput [Mbps]'
+set out 'udp-cap.png'
+set key top
+set xrange [0:1]
+set xtics 0.1
+set xlabel 'PHY delivery ratio'
+
+plot \
+ './thr' using ($2/1.7):2 t 'tries=1' w l lw 3, \
+ './thr' using ($2/1.7):4 t 'tries=4' w l lw 3, \
+ '' using ($2/1.7):6 t 'tries=10' w l lw 3
+
+set ylabel 'TCP Throughput [Mbps]'
+set key top left
+set out 'tcp-cap.png'
+plot \
+ './thr' using ($2/1.7):3 t 'tries=1' w l lw 3, \
+ './thr' using ($2/1.7):5 t 'tries=4' w l lw 3, \
+ '' using ($2/1.7):7 t 'tries=10' w l lw 3
+
