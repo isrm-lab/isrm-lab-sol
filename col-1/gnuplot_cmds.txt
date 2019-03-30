@@ -1,0 +1,6 @@
+set term png 
+set output "colocviu1.png"
+set xlabel '#clienti'
+set ylabel 'Throughput (bps)'
+set grid ytics
+plot 'col.1.out' using 1:2 t "uplink" with lp, 'col.1.out' using 1:3 t "downlink" with lines lw 3
