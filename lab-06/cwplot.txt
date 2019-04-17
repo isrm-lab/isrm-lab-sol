@@ -1,0 +1,162 @@
+
+set term png
+set out 'cwsim-pkt.png'
+set xlabel 'CW [sloturi]'
+set ylabel 'Total pachete CBR livrate'  
+set logscale x 
+set key left 
+set grid ytics
+set yrange [0:*]
+set key bottom 
+
+plot\
+ './cwsim.out' using 2:4 index 0 t '4' w l lw 3,\
+ './cwsim.out' using 2:4 index 2 t '6' w l lw 3,\
+ './cwsim.out' using 2:4 index 4 t '7' w l lw 3,\
+ './cwsim.out' using 2:4 index 6 t '20' w l lw 3, \
+ './cwsim.out' using 2:4 index 8 t '40' w l lw 3, \
+ './cwsim.out' using (5000):4 index 1 t '4 802.11' w p lc 1,\
+ './cwsim.out' using (6000):4 index 3 t '9 802.11' w p lc 2 ,\
+ './cwsim.out' using (7000):4 index 5 t '7 802.11' w p lc 3,\
+ './cwsim.out' using (8000):4 index 7 t '20 802.11' w p lc 4, \
+ './cwsim.out' using (9000):4 index 9 t '40 802.11' w p lc 5
+
+
+set out 'cwsim-rata.png'
+set ylabel 'Debit la livrare [Mbps]'  
+
+plot\
+ './cwsim.out' using 2:($4*1512*8/25e6) index 0 t '4' w l lw 3,\
+ './cwsim.out' using 2:($4*1512*8/25e6) index 2 t '6' w l lw 3,\
+ './cwsim.out' using 2:($4*1512*8/25e6) index 4 t '7' w l lw 3,\
+ './cwsim.out' using 2:($4*1512*8/25e6) index 6 t '20' w l lw 3, \
+ './cwsim.out' using 2:($4*1512*8/25e6) index 8 t '40' w l lw 3, \
+ './cwsim.out' using (5000):($4*1512*8/25e6) index 1 t '4 802.11' w p lc 1,\
+ './cwsim.out' using (6000):($4*1512*8/25e6) index 3 t '6 802.11' w p lc 2 ,\
+ './cwsim.out' using (7000):($4*1512*8/25e6) index 5 t '7 802.11' w p lc 3,\
+ './cwsim.out' using (8000):($4*1512*8/25e6) index 7 t '20 802.11' w p lc 4, \
+ './cwsim.out' using (9000):($4*1512*8/25e6) index 9 t '40 802.11' w p lc 5
+
+
+set out 'cwsim-PDR-CBR.png' 
+set ylabel 'Rata de livrare CBR'  
+
+plot\
+ './cwsim.out' using 2:($4/$3) index 0 t '4' w l lw 3,\
+ './cwsim.out' using 2:($4/$3) index 2 t '6' w l lw 3,\
+ './cwsim.out' using 2:($4/$3) index 4 t '7' w l lw 3,\
+ './cwsim.out' using 2:($4/$3) index 6 t '20' w l lw 3,\
+ './cwsim.out' using 2:($4/$3) index 8 t '40' w l lw 3, \
+ './cwsim.out' using (5000):($4/$3) index 1 t '4 802.11' w p lc 1,\
+ './cwsim.out' using (6000):($4/$3) index 3 t '6 802.11' w p lc 2,\
+ './cwsim.out' using (7000):($4/$3) index 5 t '7 802.11' w p lc 3,\
+ './cwsim.out' using (8000):($4/$3) index 7 t '20 802.11' w p lc 4,\
+ './cwsim.out' using (9000):($4/$3) index 9 t '40 802.11' w p lc 5
+
+
+set key top right
+set out 'cwsim-col.png' 
+set ylabel 'Numărul coliziunilor Date'  
+plot\
+ './cwsim.out' using 2:($5   ) index 0 t '4' w l lw 3,\
+ './cwsim.out' using 2:($5   ) index 2 t '6' w l lw 3,\
+ './cwsim.out' using 2:($5   ) index 4 t '7' w l lw 3,\
+ './cwsim.out' using 2:($5   ) index 6 t '20' w l lw 3,\
+ './cwsim.out' using 2:($5   ) index 8 t '40' w l lw 3, \
+ './cwsim.out' using (5000):($5   ) index 1 t '4 802.11' w p lc 1,\
+ './cwsim.out' using (6000):($5   ) index 3 t '6 802.11' w p lc 2,\
+ './cwsim.out' using (7000):($5   ) index 5 t '7 802.11' w p lc 3,\
+ './cwsim.out' using (8000):($5   ) index 7 t '20 802.11' w p lc 4,\
+ './cwsim.out' using (9000):($5   ) index 9 t '40 802.11' w p lc 5
+
+
+set out 'cwsim-rtscol.png' 
+set ylabel 'Numărul coliziunilor RTS'  
+plot\
+ './cwsim.out' using 2:($8   ) index 0 t '4' w l lw 3,\
+ './cwsim.out' using 2:($8   ) index 2 t '6' w l lw 3,\
+ './cwsim.out' using 2:($8   ) index 4 t '7' w l lw 3,\
+ './cwsim.out' using 2:($8   ) index 6 t '20' w l lw 3,\
+ './cwsim.out' using 2:($8   ) index 8 t '40' w l lw 3, \
+ './cwsim.out' using (5000):($8   ) index 1 t '4 802.11' w p lc 1,\
+ './cwsim.out' using (6000):($8   ) index 3 t '6 802.11' w p lc 2,\
+ './cwsim.out' using (7000):($8   ) index 5 t '7 802.11' w p lc 3,\
+ './cwsim.out' using (8000):($8   ) index 7 t '20 802.11' w p lc 4,\
+ './cwsim.out' using (9000):($8   ) index 9 t '40 802.11' w p lc 5
+
+
+set out 'cwsim-macsent.png' 
+set ylabel 'pachete CBR emise de MAC'  
+plot\
+ './cwsim.out' using 2:($6   ) index 0 t '4' w l lw 3,\
+ './cwsim.out' using 2:($6   ) index 2 t '6' w l lw 3,\
+ './cwsim.out' using 2:($6   ) index 4 t '7' w l lw 3,\
+ './cwsim.out' using 2:($6   ) index 6 t '20' w l lw 3,\
+ './cwsim.out' using 2:($6   ) index 8 t '40' w l lw 3, \
+ './cwsim.out' using (5000):($6   ) index 1 t '4 802.11' w p lc 1,\
+ './cwsim.out' using (5000):($6   ) index 3 t '6 802.11' w p lc 2,\
+ './cwsim.out' using (5000):($6   ) index 5 t '7 802.11' w p lc 3,\
+ './cwsim.out' using (5000):($6   ) index 7 t '20 802.11' w p lc 4,\
+ './cwsim.out' using (5000):($6   ) index 9 t '40 802.11' w p lc 5
+
+
+
+
+set out 'cwsim-agtsent.png'
+set ylabel 'pachete CBR emise de agent'
+plot\
+ './cwsim.out' using 2:($3   ) index 0 t '4' w l lw 3,\
+ './cwsim.out' using 2:($3   ) index 2 t '6' w l lw 3,\
+ './cwsim.out' using 2:($3   ) index 4 t '7' w l lw 3,\
+ './cwsim.out' using 2:($3   ) index 6 t '20' w l lw 3,\
+ './cwsim.out' using 2:($3   ) index 8 t '40' w l lw 3,\
+ './cwsim.out' using (5000):($3   ) index 1 t '4 802.11' w p lc 1,\
+ './cwsim.out' using (6000):($3   ) index 3 t '6 802.11' w p lc 2,\
+ './cwsim.out' using (7000):($3   ) index 5 t '7 802.11' w p lc 3,\
+ './cwsim.out' using (8000):($3   ) index 7 t '20 802.11' w p lc 4,\
+ './cwsim.out' using (9000):($3   ) index 9 t '40 802.11' w p lc 5
+ 
+
+
+set out 'cwsim-retr.png' 
+set ylabel 'transmisii per pachet'  
+
+plot\
+ './cwsim.out' using 2:($6/$4   ) index 0 t '4' w l lw 3,\
+ './cwsim.out' using 2:($6/$4   ) index 2 t '6' w l lw 3,\
+ './cwsim.out' using 2:($6/$4   ) index 4 t '7' w l lw 3,\
+ './cwsim.out' using 2:($6/$4   ) index 6 t '20' w l lw 3,\
+ './cwsim.out' using 2:($6/$4   ) index 8 t '40' w l lw 3, \
+ './cwsim.out' using (5000):($6/$4   ) index 1 t '4 802.11' w p lc 1,\
+ './cwsim.out' using (6000):($6/$4   ) index 3 t '6 802.11' w p lc 2,\
+ './cwsim.out' using (7000):($6/$4   ) index 5 t '7 802.11' w p lc 3,\
+ './cwsim.out' using (8000):($6/$4   ) index 7 t '20 802.11' w p lc 4,\
+ './cwsim.out' using (9000):($6/$4   ) index 9 t '40 802.11' w p lc 5
+
+
+set key right bottom
+set out 'cwsim-PDR-MAC.png' 
+set ylabel 'Rata de livrare MAC'  
+
+plot\
+ './cwsim.out' using 2:($4/$6   ) index 0 t '4' w l lw 3,\
+ './cwsim.out' using 2:($4/$6   ) index 2 t '6' w l lw 3,\
+ './cwsim.out' using 2:($4/$6   ) index 4 t '7' w l lw 3,\
+ './cwsim.out' using 2:($4/$6   ) index 6 t '20' w l lw 3,\
+ './cwsim.out' using 2:($4/$6   ) index 8 t '40' w l lw 3, \
+ './cwsim.out' using (5000):($4/$6   ) index 1 t '4 802.11' w p lc 1,\
+ './cwsim.out' using (6000):($4/$6   ) index 3 t '6 802.11' w p lc 2,\
+ './cwsim.out' using (7000):($4/$6   ) index 5 t '7 802.11' w p lc 3,\
+ './cwsim.out' using (8000):($4/$6   ) index 7 t '20 802.11' w p lc 4,\
+ './cwsim.out' using (9000):($4/$6   ) index 9 t '40 802.11' w p lc 5
+
+
+fc(x)=1-(1-1.0/32)**(x-1)
+set key top left
+set nologscale x
+set out 'cwsim-pc.png' 
+set ylabel 'Probabilitatea coliziunilor Date 802.11'  
+plot\
+'< grep 802.11 cwsim.out' using 1:($5/$6) t 'Pc 802.11' w lp lw 3, \
+fc(x) t 'teorie Pc=1-(1-1/32)**(N-1)' lw 3
+
