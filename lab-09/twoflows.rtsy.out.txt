@@ -1,0 +1,27 @@
+CS  - puterea la marginea CS
+bps - debit 
+x   - distanta in metri
+udp - trimis, primit de agenti
+mac - trimise de mac
+COL - coliziuni la date 
+ca  - coliziuni non-date (ACK, RTS)
+
+    CS         x   bps    UDP  UDP mac COL ca  
+1 3.65262e-10 100 1529728 1735 646 646 0 206     # coliziuni RTS, nu date 
+1 1.76149e-10 100 1534464 1712 648 648 0 236
+1 5.57346e-11 100 1494208 1706 631 631 0 224
+1 1.55924e-11 100 1619712 1706 684 684 0 0
+
+
+1 3.65262e-10 200 1240832 1713 524 818 294 145    # coliziuni RTS si date BD>250m, CTS nu ajunge
+1 1.76149e-10 200  563584 1712 238 614 376 696    # CS>282 împiedică C să răspundă cu CTS simultan cu RTS/date din A
+1 5.57346e-11 200  587264 1705 248 623 375 693
+1 1.55924e-11 200 1600768 1713 676 676   0 0
+
+
+1 3.65262e-10 300 3180224 1710 1343 1343 0 0      # RTS ajung, CTS ajung, datele ajung
+1 1.76149e-10 300 3182592 1710 1344 1344 0 0
+1 5.57346e-11 300 1562880 1721  660 660  0 830    # CTS nu poate fi emis deoarece AC=360<400, coliziuni doar de RTS
+1 1.55924e-11 300 1598400 1698  675 675  0 0
+
+
